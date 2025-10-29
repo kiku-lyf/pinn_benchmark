@@ -34,7 +34,7 @@ def get_model(exp_name):
     elif model_name == "qres":
         model = QRes(in_dim=2, hidden_dim=256, out_dim=1, num_layer=4)
     elif model_name == "setpinns":
-        model = SetPinns(d_out=1, d_hidden=32, d_model=128, N=1, heads=2)
+        model = SetPinns(d_out=1, d_hidden=512, d_model=32, N=1, heads=2)
     elif model_name == "kan":
         model = KANN(
             width=[2, 5, 5, 1], grid=5, k=3, grid_eps=1.0, noise_scale_base=0.25
