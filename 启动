@@ -3,3 +3,6 @@
 
 
  python experiments/train.py --exp_path ./runs --exp_name setpinns-harmonic-norm --device cuda:0 --res_points 50 --test_points 101 --training_iterations 500 --use_adam_warmup --adam_steps 20000 --warmup_steps 2000
+
+
+ python train.py --exp_path ./runs --exp_name setpinns-wave-norm --device cuda:0 --res_points 50 --test_points 100 --training_iterations 500 --use_adam_warmup --adam_steps 50000 --warmup_steps 2000

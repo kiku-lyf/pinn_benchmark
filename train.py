@@ -333,18 +333,22 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    # Run the experiment specified in command line
+    main(args)
+
+    # If you want to run multiple experiments, uncomment and modify the following:
     # manual sweeps
-    exp_names = [
-        "setpinns-wave-norm",
-        "setpinns-reaction-norm",
-        "setpinns-convection-norm",
-        "setpinns-plate-norm",
-        #"setpinns-harmonic-norm",
-    ]
-    seeds = [0]
-    for seed in seeds:
-        for exp_name in exp_names:
-            args.exp_name = exp_name
-            args.seed = seed
-            print(f"Running experiment: {args.exp_name} with seed {args.seed}")
-            main(args)
+    # exp_names = [
+    #     "setpinns-wave-norm",
+    #     "setpinns-reaction-norm",
+    #     "setpinns-convection-norm",
+    #     "setpinns-plate-norm",
+    #     #"setpinns-harmonic-norm",
+    # ]
+    # seeds = [0]
+    # for seed in seeds:
+    #     for exp_name in exp_names:
+    #         args.exp_name = exp_name
+    #         args.seed = seed
+    #         print(f"Running experiment: {args.exp_name} with seed {args.seed}")
+    #         main(args)
