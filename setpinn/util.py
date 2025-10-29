@@ -71,10 +71,31 @@ def eval_and_plot(exp_path, exp_name, model, run_time, data, test_points, loss_t
 
     model.eval()
     with torch.no_grad():
-        pred = model(data["x_test"], data["t_test"]).detach().cpu().numpy().reshape(test_points, test_points)
+        pred_tensor = model(data["x_test"], data["t_test"])
+        # Handle different output formats
+        if pred_tensor.dim() == 3:  # [B, S, 1] format for set-based models
+            pred = pred_tensor.squeeze(-1).reshape(-1).detach().cpu().numpy()
+        elif pred_tensor.dim() == 2:  # [N, 1] format
+            pred = pred_tensor.squeeze().detach().cpu().numpy()
+        else:  # [N] format
+            pred = pred_tensor.reshape(-1).detach().cpu().numpy()
+        pred = pred.reshape(test_points, test_points)
 
-    # Analytical solution
-    x, t = data["x_test"].detach().cpu().numpy(), data["t_test"].detach().cpu().numpy()
+    # Analytical solution - ensure inputs are 1D arrays
+    x_tensor = data["x_test"].detach().cpu().numpy()
+    t_tensor = data["t_test"].detach().cpu().numpy()
+    
+    # Handle different input formats
+    if x_tensor.ndim == 2:  # [N, 1] format
+        x = x_tensor.squeeze()
+        t = t_tensor.squeeze()
+    elif x_tensor.ndim == 3:  # [B, S, 1] format
+        x = x_tensor.squeeze(-1).reshape(-1)
+        t = t_tensor.squeeze(-1).reshape(-1)
+    else:  # [N] format
+        x = x_tensor.reshape(-1)
+        t = t_tensor.reshape(-1)
+    
     u = analytical_sol(exp_name.split("-")[1], x, t).reshape(test_points, test_points)
 
     # Errors
