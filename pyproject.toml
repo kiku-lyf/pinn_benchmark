@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "setpinn"
+version = "0.1.0"
+description = "Solving PINNs using SetTransformers"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "setpinn", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.2.2"
+numpy = "^1.26.4"
+scikit-learn = "^1.4.2"
+matplotlib = "^3.8.4"
+tqdm = "^4.66.2"
+pandas = "^2.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
